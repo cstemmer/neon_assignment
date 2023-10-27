@@ -1,0 +1,107 @@
+{
+    "plugins": [
+        "cypress",
+        "chai-friendly",
+        "mocha"
+    ],
+    "env": {
+        "browser": true,
+        "cypress/globals": true
+    },
+    "extends": [
+        "plugin:cypress/recommended",
+        "plugin:chai-friendly/recommended",
+        "airbnb"
+    ],
+    "rules": {
+        "cypress/assertion-before-screenshot": "warn",
+        "cypress/no-force": "warn",
+        "no-param-reassign": "off",
+        "func-names": 0,
+        "max-len": ["error", 
+            { 
+                "code": 100
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1,
+                "maxEOF": 1
+            }
+        ],
+        "capitalized-comments": [
+            "error",
+            "never"
+        ],
+        "no-inline-comments": "error",
+        "padding-line-between-statements": [
+            "error",
+            { 
+                "blankLine": "always",
+                "prev": [
+                    "const",
+                    "let",
+                    "var"
+                ],
+                "next": "*"
+            },
+            { 
+                "blankLine": "never",
+                "prev": [
+                    "const",
+                    "let",
+                    "var"
+                ],
+                "next": [
+                    "const",
+                    "let",
+                    "var"
+                ]
+            },
+            { 
+                "blankLine": "always",
+                "prev": "function",
+                "next": "*"
+            },
+            { 
+                "blankLine": "always",
+                "prev": "*",
+                "next": "return"
+            }
+        ],
+        "prefer-destructuring": "off",
+        "no-use-before-define": [ 2, { "functions": false } ],
+        "object-shorthand": [
+            "error",
+            "never"
+        ],
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "no-unused-expressions": 0,
+        "chai-friendly/no-unused-expressions": 2,
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": 0,
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "mocha/no-exclusive-tests": "error"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    }
+}
