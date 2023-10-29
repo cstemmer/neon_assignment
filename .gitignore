@@ -1,0 +1,21 @@
+*/*
+
+/*.*
+
+#Only Include these specific directories and subdirectories:
+!cypress_assignment/cypress/e2e
+!cypress_assignment/cypress/objects
+!cypress_assignment/cypress/plugins
+!cypress_assignment/cypress/support
+!cypress_assignment/.eslintrc.json
+!cypress_assignment/cypress.config.js
+!cypress_assignment/package.json
+!cypress_assignment/package-lock.json
+
+!playwright_assignment/tests
+!playwright_assignment/package-lock.json
+!playwright_assignment/package.json
+!playwright_assignment/playwright.config.js
+!playwright_assignment/.eslintrc.json
+!/.gitignore
+

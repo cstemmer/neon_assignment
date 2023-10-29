@@ -3,7 +3,8 @@ const setConfig = require('./cypress/plugins/index')
 
 module.exports = defineConfig({
     env: {
-        gitHubUser: 'conrad.stemmer',
+        gitHubUser: 'google login goes here',
+        gitHubPassword: 'password goes here',
         device: 'desktop'
     },
     retries: {

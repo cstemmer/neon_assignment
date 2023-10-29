@@ -1,25 +1,21 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import creationForm from '../objects/create_project_page.obj'
+
+Cypress.Commands.add('loginFE', (email, password) => {
+    cy.visit('')
+    cy.get('[data-qa=auth-button_github]').click()
+    cy.get('#login_field').type(email)
+    cy.get('#password').type(password)
+    cy.get('[type=submit]').click()
+})
+
+Cypress.Commands.add('cleanup', () => {
+    // cleanup project for next test
+    cy.visit('')
+    cy.get('[data-qa=project-actions]').click()
+    cy.get('[data-qa=project-settings-link]').click()
+    cy.get('[data-qa-id=delete]').click()
+    cy.get('[data-qa=delete-project-button]').click()
+    cy.get('[data-qa=confirmation_confirm_button]').click()
+    cy.get(creationForm.pageHeading).should('be.visible')
+        .and('have.text', 'Create project')
+})
