@@ -1,0 +1,34 @@
+<h1> Open question  </h1>
+
+Neon has two authentication providers: Google and GitHub. What would be your approach to automate it? What challenges might you encounter? What new challenges will appear with the increasing amount of test cases that use this authorisation (let say 100-1000)?
+
+<h2> Answer </h2>
+
+<p>First of all, I’d like to emphasise that in my opinion authorisation/authentication testing with providers has to be a separate testing entity from testing of the product features.</p>
+ <p></p>
+<p>The main reason for that is that when we want to test the system, we want to have our tests running on the same initial state.</p>
+<p>Say, we are testing a similar scenario to the one that was tested in the assignment - a new user creating a single free project.</p>
+<p>In order to test that well, we’ll ideally need a fresh user every time.</p>
+<p></p> 
+<p>In case we are testing some complex state - for example, user who has several databases of certain configuration and wants to manipulate them - we will inevitably need to be able to mock these states.</p>
+ <p></p> 
+<p>Not having mocks and using the same users all over and over means the necessity of reverting the users to the state where they started. Sometimes it can be done with afterEach blocks, like implemented in the test assignment, but at other times this is not feasible and extremely time-consuming.</p>
+ <p></p>
+<p>So, for feature testing I’d suggest having mock APIs not only for login, but also for all features offered by the product.</p>
+ <p></p>
+<p>But how do we test login specifically?</p>
+ <p></p>
+<p>I have never encountered working with Google and Github authentication APIs or even frontend login components - the projects where I used to work used something else. However, I did test quite a lot of national card logins (like bankID in Sweden, or iDeal in the Netherlands) and these services usually provide login details for testing.</p>
+GitHub has an option to create OAuth keys for one project and test.</p>
+<p>Google has similar options, but as far as I understand you have to pay from the beginning.</p>
+<p>There are multiple manuals on how to go through Google and Github authentications using these keys and services:</p>
+<p>https://docs.cypress.io/guides/end-to-end-testing/google-authentication</p>
+<p>https://playwright.dev/docs/auth (was very exciting to learn that playwright even stores auth session details that can be reused later on)</p>
+ 
+<p>Even though the playwright saved session solution saves a lot of headache with having to log in every time, it means the tests will have to run sequentially and not in parallel - which is not feasible in case of any reasonably-sized test suite.</p>
+ 
+<p>Furthermore, providers such as Github and Google have 2FA - which I’ve encountered multiple times while developing the tests required for assignment. There is also an error with “too many authentication requests sent”, which prompts the user to stop trying for “a couple of minutes, but up to an hour”,  apparently with a danger of blocking the test user forever.</p>
+ 
+<p>So, what I would do is run all the login tests using Playwright saved auth data, and run all functionality tests on test env using mocks. The login tests would also include the different options for GitHub and Google access (like one-time code and so on).</p>
+ 
+<p>Additionally, I would definitely test these login methods manually, using VPN from different locations, just to make sure everything works right. For national IDs I have at my current work, at least, this is routinely done - and since it is just a login test for a couple of providers, doesn’t take a tremendous amount of time. Especially if we take into account the business value of this manual test.</p>
