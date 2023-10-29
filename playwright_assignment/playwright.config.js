@@ -16,7 +16,6 @@ module.exports = defineConfig({
         trace: 'on-first-retry'
     },
 
-    /* configure projects for major browsers */
     projects: [
         { name: 'setup', testMatch: /.*\.setup\.js/ },
 

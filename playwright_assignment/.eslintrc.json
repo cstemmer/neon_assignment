@@ -1,21 +1,17 @@
 {
     "plugins": [
-        "cypress",
+        "playwright",
         "chai-friendly",
         "mocha"
     ],
     "env": {
-        "browser": true,
-        "cypress/globals": true
+        "browser": true
     },
     "extends": [
-        "plugin:cypress/recommended",
         "plugin:chai-friendly/recommended",
         "airbnb"
     ],
     "rules": {
-        "cypress/assertion-before-screenshot": "warn",
-        "cypress/no-force": "warn",
         "no-param-reassign": "off",
         "func-names": 0,
         "max-len": ["error", 
